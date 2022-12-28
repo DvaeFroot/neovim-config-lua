@@ -1,3 +1,13 @@
+----------------------------------------------------------------------
+-- SHORTCUTS (Navigate to certain sections by searcing these words) --
+----------------------------------------------------------------------
+-- 1 PACKAGE MANAGER
+-- 2 LSP RELATED PLUGINS
+-- 3 GIT RELATED PLUGINS
+-- 4 APPEARANCE
+-- 5 FILE NAVIGATION
+-- 6 OTHER QUALITY OF LIFE FEATURES
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
@@ -7,9 +17,26 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+
 require('packer').startup(function(use)
-  -- Package manager
+  ---------------------
+  -- PACKAGE MANAGER --
+  ---------------------
+  
   use 'wbthomason/packer.nvim'
+
+  -------------------------
+  -- LSP RELATED PLUGINS --
+  -------------------------
+
+  -- Null-ls 
+  -- Description: Autoformats the code using Prettier
+  use 'jose-elias-alvarez/null-ls.nvim'
+
+  -- Prettier
+  -- Requires: prettierd
+  -- Description: Formats code
+  use 'MunifTanjim/prettier.nvim'
 
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -22,9 +49,6 @@ require('packer').startup(function(use)
       'j-hui/fidget.nvim',
     },
   }
-
-  use 'jose-elias-alvarez/null-ls.nvim'
-  use 'MunifTanjim/prettier.nvim'
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -43,10 +67,23 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
-  -- Git related plugins
+  -- Flutter + dart
+  use 'dart-lang/dart-vim-plugin'
+  use 'thosakwe/vim-flutter'
+  use 'natebosch/vim-lsc'
+  use 'natebosch/vim-lsc-dart'
+
+  -------------------------
+  -- GIT RELATED PLUGINS --
+  -------------------------
+
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
+
+  ----------------
+  -- APPEARANCE --
+  ----------------
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -55,26 +92,32 @@ require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'tpope/vim-surround' -- Surround text with symbols
 
+  -- Make neovim transparent
+  use 'xiyaowong/nvim-transparent'
+
+  -- Color Preview
+  use 'norcalli/nvim-colorizer.lua'
+
+  ---------------------
+  -- File Navigation --
+  ---------------------
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  -- Flutter + dart
-  use 'dart-lang/dart-vim-plugin'
-  use 'thosakwe/vim-flutter'
-  use 'natebosch/vim-lsc'
-  use 'natebosch/vim-lsc-dart'
-
-  -- Make neovim transparent
-  use 'xiyaowong/nvim-transparent'
+  ------------------------------------
+  -- OTHER QUALITY OF LIFE PLUGINS --
+  ------------------------------------
 
   -- Automatic closing tags
   use 'windwp/nvim-ts-autotag'
   use 'windwp/nvim-autopairs'
 
   -- Tagbar
+  -- Requires: ctags
   use 'majutsushi/tagbar'
 
   -- Discord Rich Presence/RPC
@@ -82,9 +125,6 @@ require('packer').startup(function(use)
 
   -- Undotree
   use 'mbbill/undotree'
-
-  -- Color Preview
-  use 'norcalli/nvim-colorizer.lua'
 
   -- leap.nvim
   use 'ggandor/leap.nvim'
@@ -95,6 +135,10 @@ require('packer').startup(function(use)
       require("color-picker")
     end
   })
+
+  -------------------------
+  -- LOAD CUSTOM PLUGINS --
+  -------------------------
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
