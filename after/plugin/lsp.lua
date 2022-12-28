@@ -14,7 +14,6 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
-
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -35,8 +34,6 @@ local on_attach = function(_, bufnr)
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
-
-
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)

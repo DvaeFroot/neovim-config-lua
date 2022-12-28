@@ -1,12 +1,20 @@
-----------------------------------------------------------------------
--- SHORTCUTS (Navigate to certain sections by searcing these words) --
-----------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+-- SHORTCUTS (Navigate to certain sections by searcing these words) ("Visual Line + *" to instantly go to section) --
+---------------------------------------------------------------------------------------------------------------------
 -- 1 PACKAGE MANAGER
 -- 2 LSP RELATED PLUGINS
 -- 3 GIT RELATED PLUGINS
 -- 4 APPEARANCE
 -- 5 FILE NAVIGATION
 -- 6 OTHER QUALITY OF LIFE FEATURES
+-- 7 NICE-TO-HAVE PLUGINS
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -20,13 +28,13 @@ end
 
 require('packer').startup(function(use)
   ---------------------
-  -- PACKAGE MANAGER --
+  -- 1 PACKAGE MANAGER --
   ---------------------
-  
+
   use 'wbthomason/packer.nvim'
 
   -------------------------
-  -- LSP RELATED PLUGINS --
+  -- 2 LSP RELATED PLUGINS --
   -------------------------
 
   -- Null-ls 
@@ -74,16 +82,16 @@ require('packer').startup(function(use)
   use 'natebosch/vim-lsc-dart'
 
   -------------------------
-  -- GIT RELATED PLUGINS --
+  -- 3 GIT RELATED PLUGINS --
   -------------------------
 
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  ----------------
-  -- APPEARANCE --
-  ----------------
+  ------------------
+  -- 4 APPEARANCE --
+  ------------------
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -98,9 +106,9 @@ require('packer').startup(function(use)
   -- Color Preview
   use 'norcalli/nvim-colorizer.lua'
 
-  ---------------------
-  -- File Navigation --
-  ---------------------
+  -----------------------
+  -- 5 FILE NAVIGATION --
+  -----------------------
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -108,20 +116,21 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
-  ------------------------------------
-  -- OTHER QUALITY OF LIFE PLUGINS --
-  ------------------------------------
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
+  -------------------------------------
+  -- 6 OTHER QUALITY OF LIFE PLUGINS --
+  -------------------------------------
 
   -- Automatic closing tags
   use 'windwp/nvim-ts-autotag'
   use 'windwp/nvim-autopairs'
-
-  -- Tagbar
-  -- Requires: ctags
-  use 'majutsushi/tagbar'
-
-  -- Discord Rich Presence/RPC
-  use 'andweeb/presence.nvim'
 
   -- Undotree
   use 'mbbill/undotree'
@@ -135,6 +144,17 @@ require('packer').startup(function(use)
       require("color-picker")
     end
   })
+
+  ----------------------------
+  -- 7 NICE-TO-HAVE PLUGINS --
+  ----------------------------
+
+  -- Tagbar
+  -- Requires: ctags
+  use 'majutsushi/tagbar'
+
+  -- Discord Rich Presence/RPC
+  use 'andweeb/presence.nvim'
 
   -------------------------
   -- LOAD CUSTOM PLUGINS --

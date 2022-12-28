@@ -170,6 +170,11 @@ _G.packer_plugins = {
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/nvim-transparent",
     url = "https://github.com/xiyaowong/nvim-transparent"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -186,6 +191,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["onedark.nvim"] = {
     loaded = true,
