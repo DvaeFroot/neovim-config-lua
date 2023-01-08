@@ -5,8 +5,7 @@
 -- 2 LSP RELATED PLUGINS
 -- 3 GIT RELATED PLUGINS
 -- 4 APPEARANCE
--- 5 FILE NAVIGATION
--- 6 OTHER QUALITY OF LIFE FEATURES
+-- 5 FILE NAVIGATION 6 OTHER QUALITY OF LIFE FEATURES
 -- 7 NICE-TO-HAVE PLUGINS
 
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -75,12 +74,29 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  -- Customizable indentions
+  use 'lukas-reineke/indent-blankline.nvim'
+
   -- Flutter + dart
   use 'dart-lang/dart-vim-plugin'
   use 'thosakwe/vim-flutter'
   use 'natebosch/vim-lsc'
   use 'natebosch/vim-lsc-dart'
 
+  -- LaTeX
+  use "lervag/vimtex"
+  use "rafamadriz/friendly-snippets"
+  use {
+    "iurimateus/luasnip-latex-snippets.nvim",
+    -- replace "lervag/vimtex" with "nvim-treesitter/nvim-treesitter" if you're
+    -- using treesitter.
+    requires = { "L3MON4D3/LuaSnip", "lervag/vimtex" },
+    config = function()
+      require'luasnip-latex-snippets'.setup()
+      -- or setup({ use_treesitter = true })
+    end,
+    ft = "tex",
+  }
   -------------------------
   -- 3 GIT RELATED PLUGINS --
   -------------------------

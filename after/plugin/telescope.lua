@@ -10,6 +10,7 @@ telescope.setup {
       },
     },
   },
+  file_ignore_patterns = { "node%_modules/.*" }
 }
 
 -- Enable telescope fzf native, if installed

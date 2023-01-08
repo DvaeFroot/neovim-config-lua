@@ -110,6 +110,11 @@ _G.packer_plugins = {
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -129,6 +134,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["luasnip-latex-snippets.nvim"] = {
+    config = { "\27LJ\2\nD\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\27luasnip-latex-snippets\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/opt/luasnip-latex-snippets.nvim",
+    url = "https://github.com/iurimateus/luasnip-latex-snippets.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -279,6 +292,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/dvaefroot/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
@@ -296,6 +314,13 @@ time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-treesitter ]]
 vim.cmd [[ packadd nvim-treesitter-textobjects ]]
 time([[Sequenced loading]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'luasnip-latex-snippets.nvim'}, { ft = "tex" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
