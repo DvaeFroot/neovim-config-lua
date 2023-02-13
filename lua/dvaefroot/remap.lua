@@ -1,117 +1,118 @@
 ----------------------------------------------
---                  REMAPS                  --
+--                  remaps                  --
 ----------------------------------------------
--- 1 DOCUMENT NAVIGATION
--- 2 BUFFER NAVIGATION
--- 3 FILE NAVIGATION
--- 4 EDITING
--- 5 LSP RELATED
+-- 1 document navigation
+-- 2 buffer navigation
+-- 3 file navigation
+-- 4 editing
+-- 5 lsp related
 
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 
--- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- [[ basic keymaps ]]
+-- set <space> as the leader key
+-- see `:help mapleader`
+--  note: must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- keymaps for better default experience
+-- see `:help vim.keymap.set()`
+vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>', { silent = true })
 
 -------------------------
--- DOCUMENT NAVIGATION --
+-- document navigation --
 -------------------------
 
--- Remap for dealing with word wrap
+-- remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -----------------------
--- BUFFER NAVIGATION --
+-- buffer navigation --
 -----------------------
 
--- Go to previous buffer
-vim.keymap.set('n', '<leader><leader>', '<C-^>', {noremap = true , silent = false})
-
--- Go to adjacent buffers
-vim.keymap.set('n', '<leader>a', '<C-w>h', {noremap = false , silent = false})
-vim.keymap.set('n', '<leader>j', '<C-w>j', {noremap = false , silent = false})
-vim.keymap.set('n', '<leader>k', '<C-w>k', {noremap = false , silent = false})
-vim.keymap.set('n', '<leader>l', '<C-w>l', {noremap = true , silent = false})
+-- go to previous buffer
+vim.keymap.set('n', '<leader><leader>', '<c-^>', {noremap = true , silent = false})
 
 ---------------------
--- FILE NAVIGATION --
+-- file navigation --
 ---------------------
 
--- Open netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- open netrw
+vim.keymap.set("n", "<leader>pv", vim.cmd.ex)
 
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+-- see `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] find recently opened files' })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[ ] find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  -- you can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
   })
-end, { desc = '[/] Fuzzily search in current buffer]' })
+end, { desc = '[/] fuzzily search in current buffer]' })
 
--- Telescope remaps
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
--- Used for searching for help
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+-- telescope remaps
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[s]earch [f]iles' })
+-- used for searching for help
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[s]earch [h]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[s]earch current [w]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[s]earch by [g]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[s]earch [d]iagnostics' })
 
--- Toggle Nerdtree
-vim.keymap.set('n', '<F7>', ':NvimTreeToggle<CR>', {desc = '[T]oggle [N]erd Tree'})
-vim.keymap.set('n', '<leader>ff', ':NvimTreeFindFile<CR>', {desc = '[F]ind [F]ile in Nerd Tree'})
+-- toggle nvimtree
+vim.keymap.set('n', '<f7>', ':NvimTreeToggle<cr>', {desc = '[t]oggle [n]erd tree'})
+vim.keymap.set('n', '<leader>ff', ':NvimTreeFindFile<cr>', {desc = '[f]ind [f]ile in nerd tree'})
 
 --------------
--- EDITING --
+-- editing --
 --------------
 
--- Move lines around (only in Visual Mode)
-vim.keymap.set('x', '<C-K>', ':m-2<cr>gv=gv', {noremap = true , silent = false})
-vim.keymap.set('x', '<C-J>', ':m+1<cr>gv=gv', {noremap = true , silent = false})
+-- move lines around (only in visual mode)
+vim.keymap.set('x', '<c-k>', ':m-2<cr>gv=gv', {noremap = true , silent = false})
+vim.keymap.set('x', '<c-j>', ':m+1<cr>gv=gv', {noremap = true , silent = false})
 
--- Indent lines
+-- indent lines
 vim.keymap.set('n', '>', '>>', {noremap = true , silent = false})
 vim.keymap.set('n', '<', '<<', {noremap = true , silent = false})
 vim.keymap.set('x', '>', '>gv', {noremap = true , silent = false})
 vim.keymap.set('x', '<', '<gv', {noremap = true , silent = false})
 
--- Save using ctrl+s
-vim.keymap.set('n', '<C-s>', ':w<CR>' , {silent = true})
+-- save using ctrl+s
+vim.keymap.set('n', '<c-s>', ':w<cr>' , {silent = true})
 
--- LaTeX
+-- copy entire file
+vim.keymap.set('n', '<c-a>', ':%y+<CR>' , {silent = true, noremap = true})
+
+-- select entire file
+-- vim.keymap.set('n', '<c-[>', 'ggVG' , {silent = true})
+
+-- latex
 vim.cmd[[
-  " Use Tab to expand and jump through snippets
-  imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<tab>'
-  smap <silent><expr> <Tab> luasnip#jumpable() ? '<Plug>luasnip-jump-nextu' : '<tab>'
+  " use tab to expand and jump through snippets
+  imap <silent><expr> <leader> luasnip#expand_or_jumpable() ? '<plug>luasnip-expand-or-jump' : '<tab>'
+  smap <silent><expr> <leader> luasnip#jumpable() ? '<plug>luasnip-jump-nextu' : '<tab>'
 
-  " Use Shift-Tab to jump backwards through snippets
-  imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
-  smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+  " use shift-tab to jump backwards through snippets
+  imap <silent><expr> <s-leader> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
+  smap <silent><expr> <s-leader> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
 
-  " Cycle forward through choice nodes with Control-f (for example)
-  imap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>'
-  smap <silent><expr> <C-f> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-f>'
+  " cycle forward through choice nodes with control-f (for example)
+  imap <silent><expr> <c-f> luasnip#choice_active() ? '<plug>luasnip-next-choice' : '<c-f>'
+  smap <silent><expr> <c-f> luasnip#choice_active() ? '<plug>luasnip-next-choice' : '<c-f>'
 ]]
 
 -----------------
--- LSP RELATED --
+-- lsp related --
 -----------------
 
--- Diagnostic keymaps
+-- diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
--- Tagbar
-vim.keymap.set('n', '<F8>', ':TagbarToggle<CR>', {noremap = true , silent = false})
+-- tagbar
+vim.keymap.set('n', '<f8>', ':tagbartoggle<cr>', {noremap = true , silent = false})
