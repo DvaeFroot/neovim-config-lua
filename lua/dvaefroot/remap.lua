@@ -92,12 +92,12 @@ vim.keymap.set('n', '<c-a>', ':%y+<CR>' , {silent = true, noremap = true})
 -- latex
 vim.cmd[[
   " use tab to expand and jump through snippets
-  imap <silent><expr> <leader> luasnip#expand_or_jumpable() ? '<plug>luasnip-expand-or-jump' : '<tab>'
-  smap <silent><expr> <leader> luasnip#jumpable() ? '<plug>luasnip-jump-nextu' : '<tab>'
+  imap <silent><expr> <tab> luasnip#expand_or_jumpable() ? '<plug>luasnip-expand-or-jump' : '<tab>'
+  smap <silent><expr> <tab> luasnip#jumpable() ? '<plug>luasnip-jump-nextu' : '<tab>'
 
   " use shift-tab to jump backwards through snippets
-  imap <silent><expr> <s-leader> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
-  smap <silent><expr> <s-leader> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
+  imap <silent><expr> <s-tab> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
+  smap <silent><expr> <s-tab> luasnip#jumpable(-1) ? '<plug>luasnip-jump-prev' : '<s-tab>'
 
   " cycle forward through choice nodes with control-f (for example)
   imap <silent><expr> <c-f> luasnip#choice_active() ? '<plug>luasnip-next-choice' : '<c-f>'

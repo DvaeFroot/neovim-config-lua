@@ -24,7 +24,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
-
 require('packer').startup(function(use)
   ---------------------
   -- 1 PACKAGE MANAGER --
@@ -73,6 +72,8 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
   }
+
+  use 'mfussenegger/nvim-lint'
 
   -- Customizable indentions
   use 'lukas-reineke/indent-blankline.nvim'

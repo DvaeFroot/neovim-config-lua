@@ -48,7 +48,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'gopls', 'html', 'cssls'}
+local servers = {'pyright', 'tsserver', 'gopls', 'html', 'cssls'}
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -83,24 +83,24 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    -- ['<Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -161,17 +161,19 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 local lspconfig = require('lspconfig')
 
-lspconfig.tsserver.setup {
-  flags = {allow_incremental_sync = true, debounce_text_changes = 500},
-  diagnosticsDelay = "500ms",
-  experimentalWatchedFileDelay = "1000ms",
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx"},
-  cmd = { "typescript-language-server", "--stdio"}
-}
+lspconfig.clangd.setup{}
 
-lspconfig.sumneko_lua.setup {
+-- lspconfig.tsserver.setup {
+--   flags = {allow_incremental_sync = true, debounce_text_changes = 500},
+--   diagnosticsDelay = "500ms",
+--   experimentalWatchedFileDelay = "1000ms",
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "typescript", "typescriptreact", "typescript.tsx"},
+--   cmd = { "typescript-language-server", "--stdio"}
+-- }
+
+lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -194,3 +196,4 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+
